@@ -1,22 +1,21 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import { searchVideos } from '../actionCreators';
 class SearchBar extends React.Component {
-
+    
     state = {
         searchText: ''
     };
 
-    //this.setState can accept either an object or a function as its argument
-    // and perform a shallow merge later on
     onInputChange = (event) =>{
-        this.setState({searchText : event.target.value});
+        this.setState({ searchText: event.target.value});
     }
 
     onSearchSubmit = (event) =>{
         event.preventDefault(); //default browser behaviour is refresh
-        // console.log(this.state.searchText);
-        //execute search
-        this.props.onSearchBarSubmit(this.state.searchText);
+        // console.log(searchVideos);
+        // console.log(this.props.searchVideos);
+        this.props.searchVideos(this.state.searchText);
     }
 
     //used semantic ui website for preffered classes
@@ -36,7 +35,6 @@ class SearchBar extends React.Component {
             </div>
         );
     }
-    // could have used an arrow function directly with onChnage in {}
 }
 
-export default SearchBar;
+export default connect( null, {searchVideos})(SearchBar);

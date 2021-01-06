@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {selectVideo} from '../actionCreators';
 
 class VideoItem extends React.Component{
     
@@ -7,7 +9,7 @@ class VideoItem extends React.Component{
         // console.log(video);
         return(
             <div className='item'>
-                <div className='content' onClick={this.selectVideo}>
+                <div className='content' onClick={this.videoSelect}>
                     <img className='left floated ui tiny image'
                       src={video.snippet.thumbnails.default.url}
                       alt={video.snippet.description}/>
@@ -18,7 +20,9 @@ class VideoItem extends React.Component{
         );
     }
 
-    selectVideo = () =>{this.props.onVideoSelect(this.props.video)};
+    videoSelect = () =>{this.props.selectVideo(this.props.video)};
 }
 
-export default VideoItem;
+//no need of mapStateToProps
+
+export default connect(null, {selectVideo})(VideoItem);

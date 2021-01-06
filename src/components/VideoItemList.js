@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import VideoItem from './VideoItem';
 
 class VideoItemList extends React.Component {
@@ -10,7 +11,6 @@ class VideoItemList extends React.Component {
     let renderedList = videos.map((video) => {
         return(<VideoItem 
           key={video.id.videoId}
-          onVideoSelect={this.props.onVideoSelect}
           video={video} />)}
         );
 
@@ -20,4 +20,12 @@ class VideoItemList extends React.Component {
     }
 }
 
-export default VideoItemList;
+//ownProps argument not needed
+const mapStateToProps = state =>{
+    return {
+        videos: state.videos
+    };
+}
+
+//no actionCreators used in this component
+export default connect(mapStateToProps)(VideoItemList);
